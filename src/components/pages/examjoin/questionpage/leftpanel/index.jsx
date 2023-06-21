@@ -1,24 +1,23 @@
-import { Paper } from "@material-ui/core";
-import React from "react";
-import { Button, Container } from "../../../../../styled";
-import Question from "./Question";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import { useSelector } from "react-redux";
-import { ExamContextConsumer } from "../../context";
+import { Paper } from '@material-ui/core'
+import React from 'react'
+import { Button, Container } from '../../../../../styled'
+import Question from './Question'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import { useSelector } from 'react-redux'
+import { ExamContextConsumer } from '../../context'
 
 const LeftPanel = () => {
-  const { currentExam } = useSelector((state) => state.exam);
-  const { count, setCount } = ExamContextConsumer();
+  const { currentExam } = useSelector((state) => state.exam)
+  const { count, setCount } = ExamContextConsumer()
   const onNext = () => {
-    if (count + 1 < currentExam.questions.length) setCount(count + 1);
-  };
+    if (count + 1 < currentExam.questions.length) setCount(count + 1)
+  }
   const onPrev = () => {
-    if (count > 0) setCount(count - 1);
-  };
-
+    if (count > 0) setCount(count - 1)
+  }
   return (
-    <Paper style={{ height: "", margin: "10px" }}>
+    <Paper style={{ height: '', margin: '10px' }}>
       <Question
         question={currentExam.questions[count]}
         examid={currentExam._id}
@@ -57,7 +56,7 @@ const LeftPanel = () => {
         </Button>
       </Container>
     </Paper>
-  );
-};
+  )
+}
 
-export default LeftPanel;
+export default LeftPanel

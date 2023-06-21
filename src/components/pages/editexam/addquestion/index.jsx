@@ -11,37 +11,31 @@ const Question = ({ details, setDetails }) => {
   const [open, setOpen] = useState(false);
 
   const [question, setQuestion] = useState({
-    title: "",
+    title: '',
+    qtype: 'mcq', //'mcq','fb','descriptive','code'
+    fbans:"",
     options: [
       {
-        option: "",
+        option: '',
         isanswer: true,
       },
       {
-        option: "",
+        option: '',
         isanswer: false,
       },
       {
-        option: "",
+        option: '',
         isanswer: false,
       },
       {
-        option: "",
+        option: '',
         isanswer: false,
       },
     ],
     mark: 0,
-  });
+  })
 
   const onAdds = async () => {
-    if (
-      question.title &&
-      question.options[0].option &&
-      question.options[1].option &&
-      question.options[2].option &&
-      question.options[3].option &&
-      question.mark
-    ) {
       let ques = details.questions;
       ques.push(question);
       let body = { questions: ques };
@@ -51,6 +45,8 @@ const Question = ({ details, setDetails }) => {
         if (exam) setDetails(exam);
         setQuestion({
           title: "",
+          qtype:"mcq",
+          fbans:"",
           options: [
             {
               option: "",
@@ -72,9 +68,6 @@ const Question = ({ details, setDetails }) => {
           mark: 0,
         });
       }
-    } else {
-      dispatch(setErrorAlert("Fill Question details properly"));
-    }
   };
 
   return (

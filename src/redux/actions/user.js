@@ -5,9 +5,11 @@ import { addUser, removeUser } from "../../utils/localStorage";
 import { getUser } from "../../utils/localStorage";
 
 export const signIn = (details) => async (dispatch) => {
+  console.log("signin despatch");
   const { response, error } = await axiosHook("/signin", "POST", details);
   if (!error) {
     const { token, user } = response.data;
+    
     await addUser({ token, user, isLogin: true });
     dispatch({ type: SET_USER, payload: user });
     return true;
@@ -17,6 +19,7 @@ export const signIn = (details) => async (dispatch) => {
 };
 
 export const signUp = (details) => async (dispatch) => {
+  console.log(details);
   const { error } = await axiosHook("/signup", "POST", details);
   if (!error) {
     history.push("/signin");

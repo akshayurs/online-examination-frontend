@@ -1,124 +1,126 @@
-import React, { useEffect } from "react";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Container, Button, Text } from "../../styled";
-import history from "../../utils/createHistory";
+import React, { useEffect } from 'react'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Container, Button, Text } from '../../styled'
+import history from '../../utils/createHistory'
 
 export default function Accordions({ exams = [], user = null }) {
-  const [expanded, setExpanded] = React.useState(false);
-  const [examData, setExamData] = React.useState([]);
+  const [expanded, setExpanded] = React.useState(false)
+  const [examData, setExamData] = React.useState([])
 
+  // TODO: change join exam here for testing
   useEffect(() => {
-    let timer = null;
+    let timer = null
     setExamData((prevExam) => {
       return exams.map((exam) => {
-        let now = Date.parse(Date());
-        let start = Date.parse(exam.startingtime);
-        let end = Date.parse(exam.endingtime);
+        let now = Date.parse(Date())
+        let start = Date.parse(exam.startingtime)
+        let end = Date.parse(exam.endingtime)
         if (now < start) {
-          return "edit";
+          return 'edit'
         } else if (now >= start && now < end) {
-          return "join";
+          return 'join'
         } else if (end < now && start < now) {
-          return "result";
+          return 'result'
         }
-      });
-    });
+      })
+    })
     timer = setInterval(() => {
       setExamData((prevExam) => {
         return exams.map((exam) => {
-          let now = Date.parse(Date());
-          let start = Date.parse(exam.startingtime);
-          let end = Date.parse(exam.endingtime);
+          // return 'join'
+          let now = Date.parse(Date())
+          let start = Date.parse(exam.startingtime)
+          let end = Date.parse(exam.endingtime)
           if (now < start) {
-            return "edit";
+            return 'edit'
           } else if (now >= start && now < end) {
-            return "join";
+            return 'join'
           } else if (end < now && start < now) {
-            return "result";
+            return 'result'
           }
-        });
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [exams]);
+        })
+      })
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [exams])
 
   const Buttons = ({ type, exam = null }) => {
     switch (examData[type]) {
-      case "edit":
-        if (user === "HOST") {
+      case 'edit':
+        if (user === 'HOST') {
           return (
             <Button
               height="30px"
               width="80px"
               background="#4CA2D2"
               onClick={() => {
-                history.push(`/exam/edit?exam_id=${exam._id}`);
+                history.push(`/exam/edit?exam_id=${exam._id}`)
               }}
             >
               Edit
             </Button>
-          );
+          )
         } else {
           return (
             <Button height="30px" width="80px" background="#C9E4D7">
               Join
             </Button>
-          );
+          )
         }
-      case "join":
+      case 'join':
         return (
           <Button
             height="30px"
             width="80px"
             background="#82DAB0"
             onClick={() => {
-              user === "HOST"
+              user === 'HOST'
                 ? history.push(`/host/joinexam?exam_id=${exam._id}`)
                 : // : history.push(`/joinexam?exam_id=${exam._id}`);
-                  window.open(`/joinexam?exam_id=${exam._id}`, "_blank");
+                  window.open(`/joinexam?exam_id=${exam._id}`, '_blank')
             }}
           >
-            {user === "HOST" ? "Exam Live" : "Join"}
+            {user === 'HOST' ? 'Exam Live' : 'Join'}
           </Button>
-        );
-      case "result":
+        )
+      case 'result':
         return (
           <Button
             height="30px"
             width="100px"
             background="#6089F1"
             onClick={() =>
-              user === "HOST"
+              user === 'HOST'
                 ? history.push(`/exam/result?exam_id=${exam._id}`)
                 : history.push(`/candidate/result?exam_id=${exam._id}`)
             }
           >
             View Result
           </Button>
-        );
+        )
       default:
-        return <></>;
+        return <></>
     }
-  };
+  }
 
   const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+    setExpanded(isExpanded ? panel : false)
+  }
 
   const timeConverter = (date = Date()) => {
-    var D = new Date(date);
+    var D = new Date(date)
     let dateString = `${D.toLocaleDateString()} ${D.toLocaleTimeString(
-      "en-US",
+      'en-US',
       {
-        hour: "2-digit",
-        minute: "2-digit",
+        hour: '2-digit',
+        minute: '2-digit',
       }
-    )}`;
-    return dateString;
-  };
+    )}`
+    return dateString
+  }
 
   return (
     <Container direction="column">
@@ -150,7 +152,7 @@ export default function Accordions({ exams = [], user = null }) {
               </Container>
             </Container>
           </AccordionSummary>
-          <AccordionDetails style={{ padding: "10px" }}>
+          <AccordionDetails style={{ padding: '10px' }}>
             <Container direction="column">
               <Container>
                 <Text lineHeight="15px">{exam.examinfo}</Text>
@@ -182,5 +184,5 @@ export default function Accordions({ exams = [], user = null }) {
         </Accordion>
       ))}
     </Container>
-  );
+  )
 }

@@ -29,16 +29,14 @@ const SignIn = (props) => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (password.length >= 9) {
       if (await dispatch(signIn(details))) {
         setTimeout(() => {
           history.push("/host");
-        }, 1000);
+        }, 500);
         setDetails({
           email: "",
           password: "",
         });
-      }
     }
   };
 
@@ -67,7 +65,7 @@ const SignIn = (props) => {
                 margin="10px 0px"
                 height="40px"
                 type="password"
-                minLength={9}
+                minLength={0}
                 value={password}
                 width="80%"
                 placeholder="Password"

@@ -82,7 +82,7 @@ export const createExam = (details) => async (dispatch) => {
     details
   );
   if (!error) {
-    return true;
+    return response.data;
   } else {
     return false;
   }

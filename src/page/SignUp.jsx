@@ -43,6 +43,7 @@ const SignUp = () => {
     if (details["password"] === details["confirmpassword"])
       dispatch(signUp(details));
   };
+  console.log({details});
   return (
     <HeadFoot>
       <Container justify="center" align="center" height="100%">
@@ -52,6 +53,22 @@ const SignUp = () => {
           </Container>
           <form onSubmit={onsubmit}>
             <Container direction="column" align="center">
+              <Container direction="row" flex align="center" justify="center">
+                <label htmlFor="usertype">Type</label>
+                <select
+                  id="usertype"
+                  style={{
+                    padding: '6px 10px',
+                    marginLeft: '5px',
+                  }}
+                  name="usertype"
+                  value={details['usertype'] || 'candidate'}
+                  onChange={onchange}
+                >
+                  <option value="candidate">Candidate</option>
+                  <option value="company">Company</option>
+                </select>
+              </Container>
               <Input
                 margin="10px 0px"
                 type="text"
@@ -59,7 +76,7 @@ const SignUp = () => {
                 height="40px"
                 name="name"
                 placeholder="Name"
-                value={details["name"] || ""}
+                value={details['name'] || ''}
                 onChange={onchange}
                 maxLength={30}
                 required
@@ -70,7 +87,7 @@ const SignUp = () => {
                 type="email"
                 name="email"
                 width="80%"
-                value={details["email"] || ""}
+                value={details['email'] || ''}
                 onChange={onchange}
                 placeholder="Email"
                 required
@@ -80,7 +97,7 @@ const SignUp = () => {
                   className={classes.textarea}
                   placeholder="About Yourself"
                   name="userinfo"
-                  value={details["userinfo"] || ""}
+                  value={details['userinfo'] || ''}
                   onChange={onchange}
                   required
                 ></textarea>
@@ -91,10 +108,10 @@ const SignUp = () => {
                 type="password"
                 name="password"
                 width="80%"
-                value={details["password"] || ""}
+                value={details['password'] || ''}
                 onChange={onchange}
                 placeholder="Password"
-                minLength={9}
+                minLength={6}
                 required
               />
               <Input
@@ -104,9 +121,9 @@ const SignUp = () => {
                 name="confirmpassword"
                 width="80%"
                 placeholder="Confirm Password"
-                value={details["confirmpassword"] || ""}
+                value={details['confirmpassword'] || ''}
                 onChange={onchange}
-                minLength={9}
+                minLength={6}
                 required
               />
               <Container width="80%" justify="flex-end">
@@ -119,7 +136,7 @@ const SignUp = () => {
         </Paper>
       </Container>
     </HeadFoot>
-  );
+  )
 };
 
 export default SignUp;

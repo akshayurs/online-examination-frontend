@@ -19,7 +19,7 @@ const Index = () => {
   }, []);
 
   const onSave = async () => {
-    const { name, email, userinfo, password, confirmpassword } = user;
+    const { name, email, userinfo, password, confirmpassword,usertype } = user;
     if (password && confirmpassword && password === confirmpassword) {
       if (await dispatch(updateUserPassword(password))) {
         if (await dispatch(updateUser({ name, email, userinfo }))) {

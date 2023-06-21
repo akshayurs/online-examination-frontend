@@ -10,6 +10,7 @@ import {
   getHostpast,
   getHostUpcoming,
 } from '../../../redux/actions/exam'
+import history from '../../../utils/createHistory'
 
 const CreateExamDialog = () => {
   const dispatch = useDispatch()
@@ -27,7 +28,8 @@ const CreateExamDialog = () => {
     let end = Date.parse(endingtime)
     if (examtitle && examinfo && now < start && start < end) {
       console.log(details)
-      if (await dispatch(createExam(details))) {
+      const res = await dispatch(createExam(details))
+      if (res) {
         dispatch(getHostpast())
         dispatch(getHostUpcoming())
         setDetails({
@@ -36,6 +38,7 @@ const CreateExamDialog = () => {
           startingtime: '',
           endingtime: '',
         })
+        history.push("/exam/edit?exam_id="+res._id)
         setOpen(false)
       }
     } else {

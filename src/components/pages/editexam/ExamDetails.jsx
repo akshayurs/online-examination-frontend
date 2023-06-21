@@ -1,43 +1,44 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { Container, Button } from "../../../styled";
-import MultiSelect from "../../materialui/MultiSelect";
-import ModelForm from "../createexamdialog/ModelForm";
-import AddQuestionModel from "./addquestion";
-import { useDispatch } from "react-redux";
-import { editExam, getUserList, deleteExam } from "../../../redux/actions/exam";
-import history from "../../../utils/createHistory";
+import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { Container, Button } from '../../../styled'
+import MultiSelect from '../../materialui/MultiSelect'
+import ModelForm from '../createexamdialog/ModelForm'
+import AddQuestionModel from './addquestion'
+import { useDispatch } from 'react-redux'
+import { editExam, getUserList, deleteExam } from '../../../redux/actions/exam'
+import history from '../../../utils/createHistory'
 
 const ExamDetails = ({ details, setDetails }) => {
-  const dispatch = useDispatch();
-  const [selectedOption, setSelectedOption] = useState([]);
+  const dispatch = useDispatch()
+  const [selectedOption, setSelectedOption] = useState([])
   const [nameInfo, setNameInfo] = useState({
-    examtitle: "",
-    examinfo: "",
-    startingtime: "",
-    endingtime: "",
-  });
-  const [options, setOptions] = useState([]);
+    examtitle: '',
+    examinfo: '',
+    startingtime: '',
+    endingtime: '',
+  })
+  const [options, setOptions] = useState([])
   useEffect(() => {
     const getData = async () => {
-      let arr = await dispatch(getUserList());
-      setOptions([...arr]);
+      let arr = await dispatch(getUserList())
+      arr = arr.filter((user) => user['usertype'] == 'candidate')
+      setOptions([...arr])
       if (details && details.candidates) {
         let added = arr.filter((ele) =>
           details.candidates.find((v) => String(v.id) === String(ele._id))
-        );
-        setSelectedOption([...added]);
+        )
+        setSelectedOption([...added])
       }
-    };
-    getData();
+    }
+    getData()
     setNameInfo({
       examtitle: details.examtitle,
       examinfo: details.examinfo,
       startingtime: details.startingtime,
       endingtime: details.endingtime,
-    });
-  }, [dispatch, details]);
+    })
+  }, [dispatch, details])
 
   const onSave = async () => {
     await dispatch(
@@ -54,8 +55,8 @@ const ExamDetails = ({ details, setDetails }) => {
         },
         details._id
       )
-    );
-  };
+    )
+  }
   return (
     <Container direction="row" background="white" width="70%" padding="20px">
       <Container direction="row" width="90%">
@@ -78,7 +79,7 @@ const ExamDetails = ({ details, setDetails }) => {
           height="40px"
           background="#D24C4C"
           onClick={async () => {
-            if (await dispatch(deleteExam(details._id))) history.push("/host");
+            if (await dispatch(deleteExam(details._id))) history.push('/host')
           }}
         >
           Delete Exam
@@ -89,7 +90,7 @@ const ExamDetails = ({ details, setDetails }) => {
         <AddQuestionModel details={details} setDetails={setDetails} />
       </Container>
     </Container>
-  );
-};
+  )
+}
 
-export default ExamDetails;
+export default ExamDetails

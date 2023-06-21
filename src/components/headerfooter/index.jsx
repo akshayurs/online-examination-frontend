@@ -15,7 +15,6 @@ const index = ({ children }) => {
       >
         {children}
       </Container>
-      <Footer />
     </div>
   );
 };

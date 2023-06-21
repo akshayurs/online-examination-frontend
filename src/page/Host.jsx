@@ -3,12 +3,19 @@ import React from "react";
 import HeadFoot from "../components/headerfooter";
 
 import { Container, Text } from "../styled";
+import history from '../utils/createHistory'
 
 import HostUpcomigAccordian from "../components/pages/host/HostUpcomigAccordian";
 import HostPastAccordian from "../components/pages/host/HostPastAccordian";
 import CreateExamDialog from "../components/pages/createexamdialog";
+import { getUser } from '../utils/localStorage'
+import { useRef } from 'react'
 
 const Host = () => {
+  const dbUser = useRef(getUser())
+  if(dbUser.current.user.usertype!="company"){
+    history.push("/exam")
+  }
   return (
     <HeadFoot>
       <Container direction="row" justify="space-between">

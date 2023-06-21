@@ -13,17 +13,19 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(false);
   const user = useSelector((state) => state.user);
+  const [dbUser,setDbUser] = useState(null)
   const check =
     history.location.pathname === "/host" ||
     history.location.pathname === "/exam";
   useEffect(() => {
-    if (getUser()) {
+    const res = getUser()
+    setDbUser(res)
+    if (res) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
     }
   }, [user]);
-
   return (
     <Container
       direction="row"
@@ -59,22 +61,22 @@ const Header = (props) => {
         height="50px"
         flex="0.8"
       >
-        {isLogin && check && (
-          <>
+        {isLogin && check && dbUser && (
+          
+            (dbUser["user"]["usertype"]=="company"?
             <Tab
               active={history.location.pathname === "/host"}
               onClick={() => history.push("/host")}
             >
               Host
-            </Tab>
-
-            <Tab
+            </Tab>:
+             <Tab
               active={history.location.pathname === "/exam"}
               onClick={() => history.push("/exam")}
             >
               Exam
             </Tab>
-          </>
+            )
         )}
       </Container>
       <Container

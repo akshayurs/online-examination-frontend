@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { Container, Text } from "../../../styled";
-import CheckIcon from "@material-ui/icons/Check";
-import CloseIcon from "@material-ui/icons/Close";
+import React, { useState, useEffect } from 'react'
+import { Container, Text } from '../../../styled'
+import CheckIcon from '@material-ui/icons/Check'
+import CloseIcon from '@material-ui/icons/Close'
 
 const QuesAns = ({ question, answer, idx }) => {
-  const [currAns, setcurrAns] = useState("");
+  const [currAns, setcurrAns] = useState('')
 
   useEffect(() => {
     if (answer && answer.answers) {
       let ans = answer.answers.find(
         (ans) => String(ans.questionid) === String(question._id)
-      );
-      setcurrAns({ ...ans });
+      )
+      setcurrAns({ ...ans })
     }
-  }, [answer, question]);
+  }, [answer, question])
 
   const checkSymbol = (opt) => {
     if (opt.isanswer) {
-      return <CheckIcon fontSize="small" style={{ color: "green" }} />;
+      return <CheckIcon fontSize="small" style={{ color: 'green' }} />
     } else if (String(currAns.optionid) === String(opt._id) && !opt.isanswer) {
-      return <CloseIcon fontSize="small" style={{ color: "red" }} />;
+      return <CloseIcon fontSize="small" style={{ color: 'red' }} />
     }
-  };
+  }
 
   return (
     <Container
@@ -42,25 +42,39 @@ const QuesAns = ({ question, answer, idx }) => {
         </Container>
         <Text width="10%" size="15px">
           <b>Mark: </b>
-          {currAns.mark || "0"}/{question.mark}
+          {currAns.mark || '0'}/{question.mark}
         </Text>
       </Container>
+
       <Container direction="row" align="flex-end" justify="space-between">
-        <Container width="90%">
-          <ol>
-            {question.options.map((opt, idx) => (
-              <li style={{ display: "flex" }}>
-                <Text lineHeight="0px">
-                  {idx + 1}: {opt.option}
-                </Text>
-                {checkSymbol(opt)}
-              </li>
-            ))}
-          </ol>
-        </Container>
+        {question['qtype'] == 'mcq' && (
+          <Container width="90%">
+            <ol>
+              {question.options.map((opt, idx) => (
+                <li style={{ display: 'flex' }}>
+                  <Text lineHeight="0px">
+                    {idx + 1}: {opt.option}
+                  </Text>
+                  {checkSymbol(opt)}
+                </li>
+              ))}
+            </ol>
+          </Container>
+        )}
+        {question['qtype'] == 'fb' && <Text>{currAns.answer}</Text>}
+        {question['qtype'] == 'descriptive' && (
+          <pre style={{ backgroundColor: '#eee', width: '100%' }}>
+            {currAns.answer}
+          </pre>
+        )}
+        {question['qtype'] == 'code' && (
+          <pre style={{ backgroundColor: '#eee', width: '100%' }}>
+            {currAns.answer}
+          </pre>
+        )}
       </Container>
     </Container>
-  );
-};
+  )
+}
 
-export default QuesAns;
+export default QuesAns
