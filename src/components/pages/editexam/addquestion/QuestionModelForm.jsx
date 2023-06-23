@@ -9,7 +9,7 @@ const QuestionModelForm = ({ question, setQuestion }) => {
       margin: '10px 0px',
     },
     textarea: {
-      background: '#EDF8DF',
+      background: '#dcdcdc',
       border: '1px solid #000000',
       boxSizing: 'border-box',
       borderRadius: '2px',

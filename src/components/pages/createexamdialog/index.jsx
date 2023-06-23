@@ -38,7 +38,7 @@ const CreateExamDialog = () => {
           startingtime: '',
           endingtime: '',
         })
-        history.push("/exam/edit?exam_id="+res._id)
+        history.push('/exam/edit?exam_id=' + res._id)
         setOpen(false)
       }
     } else {
@@ -51,7 +51,7 @@ const CreateExamDialog = () => {
       open={open}
       MainButton={(props) => (
         <IconButtons
-          backgroundColor="#47926E"
+          backgroundColor="#2b325c"
           height="10px"
           width="10px"
           position="absolute"

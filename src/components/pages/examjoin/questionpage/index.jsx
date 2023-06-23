@@ -1,25 +1,25 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Container } from "../../../../styled";
-import Header from "./header";
-import LeftPanel from "./leftpanel";
-import RightPanel from "./rightpanel";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { ExamContextConsumer } from "../context";
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { Container } from '../../../../styled'
+import Header from './header'
+import LeftPanel from './leftpanel'
+import RightPanel from './rightpanel'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import { ExamContextConsumer } from '../context'
 
 const Index = () => {
-  const { loader } = useSelector((state) => state);
-  const { activateEvents } = ExamContextConsumer();
+  const { loader } = useSelector((state) => state)
+  const { activateEvents } = ExamContextConsumer()
   useEffect(() => {
-    activateEvents();
-  }, []);
+    activateEvents()
+  }, [])
 
   return (
     <Container
       height="100%"
       width="100%"
       direction="column"
-      background="#EDF8DF"
+      background="#dcdcdc"
     >
       {loader > 0 && (
         <Container
@@ -33,7 +33,7 @@ const Index = () => {
           zIndex={2}
         >
           <CircularProgress
-            style={{ height: "60px", width: "60px", color: "green" }}
+            style={{ height: '60px', width: '60px', color: 'green' }}
           />
         </Container>
       )}
@@ -43,7 +43,7 @@ const Index = () => {
         <RightPanel />
       </Container>
     </Container>
-  );
-};
+  )
+}
 
-export default Index;
+export default Index

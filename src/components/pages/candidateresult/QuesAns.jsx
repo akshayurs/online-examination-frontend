@@ -42,7 +42,8 @@ const QuesAns = ({ question, answer, idx }) => {
         </Container>
         <Text width="10%" size="15px">
           <b>Mark: </b>
-          {currAns.mark || '0'}/{question.mark}
+          {/* {currAns.mark || '0'}/ */}
+          {question.mark}
         </Text>
       </Container>
 
@@ -55,7 +56,7 @@ const QuesAns = ({ question, answer, idx }) => {
                   <Text lineHeight="0px">
                     {idx + 1}: {opt.option}
                   </Text>
-                  {checkSymbol(opt)}
+                  {/* {checkSymbol(opt)} */}
                 </li>
               ))}
             </ol>

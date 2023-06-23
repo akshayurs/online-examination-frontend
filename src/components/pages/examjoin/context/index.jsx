@@ -104,7 +104,7 @@ export function ExamContextProvider({ children }) {
       setIsFullscreen(true)
       play()
     } else {
-      alert('Do not close the fullscreen')
+      alert("Warning: Don't exit fullscreen mode")
       setIsFullscreen(false)
       pause()
     }
@@ -116,8 +116,10 @@ export function ExamContextProvider({ children }) {
       window.removeEventListener('focus', play)
       element.removeEventListener('fullscreenchange', checkFullScreen)
       clearTimeout(timer)
-      if (window.document.fullscreenElement) toogleFullscreen()
-      history.push('/exam')
+      setTimeout(() => {
+        if (window.document.fullscreenElement) toogleFullscreen()
+        history.push('/exam')
+      }, 1000)
     } else if (
       currentExam &&
       answer &&
@@ -127,8 +129,10 @@ export function ExamContextProvider({ children }) {
       window.removeEventListener('focus', play)
       element.removeEventListener('fullscreenchange', checkFullScreen)
       clearTimeout(timer)
-      if (window.document.fullscreenElement) toogleFullscreen()
-      history.push('/exam')
+      setTimeout(() => {
+        if (window.document.fullscreenElement) toogleFullscreen()
+        history.push('/exam')
+      }, 1000)
     }
   }
 

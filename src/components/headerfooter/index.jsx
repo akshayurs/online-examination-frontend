@@ -1,7 +1,7 @@
-import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import { Container } from "../../styled";
+import React from 'react'
+import Header from './Header'
+import Footer from './Footer'
+import { Container } from '../../styled'
 
 const index = ({ children }) => {
   return (
@@ -11,11 +11,11 @@ const index = ({ children }) => {
         direction="column"
         height="90vh"
         overflow="auto"
-        background="#EDF8DF"
+        background="#dcdcdc"
       >
         {children}
       </Container>
     </div>
-  );
-};
-export default index;
+  )
+}
+export default index

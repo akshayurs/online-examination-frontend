@@ -23,7 +23,7 @@ const InstructionScreen = () => {
           <Text size="24px" lineHeight="2px" weight="bold">
             Instruction:
           </Text>
-          <ol style={{ fontSize: "22px" }}>
+          <ol style={{ fontSize: '22px' }}>
             <li>
               On clicking the "Start" button, you will enter the FullScreen mode
               of the exam.
@@ -50,14 +50,14 @@ const InstructionScreen = () => {
               section of the exam page.
             </li>
           </ol>
-          <label for="instruction" style={{ fontSize: "22px", color: "red" }}>
+          <label for="instruction" style={{ fontSize: '22px', color: 'red' }}>
             <input
               type="checkbox"
               id="instruction"
               name="instruction"
               checked={agree}
               onChange={() => {
-                setAgree(!agree);
+                setAgree(!agree)
               }}
             ></input>
             I have read the instruction and permit to track my computer activity
@@ -69,9 +69,9 @@ const InstructionScreen = () => {
             width="80px"
             height="30px"
             margin="10px 10px 0 0"
-            background="#D31A50"
+            background="#40954e"
             onClick={() => {
-              videoPermission && agree && answer && toogleFullscreen();
+              videoPermission && agree && answer && toogleFullscreen()
             }}
           >
             Start
@@ -83,7 +83,7 @@ const InstructionScreen = () => {
             onClick={() => {
               agree
                 ? setVideoPermission(!videoPermission)
-                : dispatch(setErrorAlert("Agree to the conditions first"));
+                : dispatch(setErrorAlert('Agree to the conditions first'))
             }}
           >
             Test and Allow Audio and Video
@@ -91,7 +91,7 @@ const InstructionScreen = () => {
         </Container>
       </Container>
     </HeaderFooter>
-  );
+  )
 };
 
 export default InstructionScreen;

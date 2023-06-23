@@ -75,7 +75,7 @@ export default function Accordions({ exams = [], user = null }) {
           <Button
             height="30px"
             width="80px"
-            background="#82DAB0"
+            background="#25d110"
             onClick={() => {
               user === 'HOST'
                 ? history.push(`/host/joinexam?exam_id=${exam._id}`)

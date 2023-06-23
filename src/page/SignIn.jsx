@@ -1,44 +1,44 @@
-import React, { useState } from "react";
-import HeadFoot from "../components/headerfooter";
-import { Container, Text, Input, Button } from "../styled";
-import Paper from "@material-ui/core/Paper";
-import { useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { signIn } from "../redux/actions/user";
-import history from "../utils/createHistory";
+import React, { useState } from 'react'
+import HeadFoot from '../components/headerfooter'
+import { Container, Text, Input, Button } from '../styled'
+import Paper from '@material-ui/core/Paper'
+import { useDispatch } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
+import { signIn } from '../redux/actions/user'
+import history from '../utils/createHistory'
 const useStyles = makeStyles((theme) => ({
   paper: {
-    height: "40vh",
-    minHeight: "200px",
-    width: "30vw",
-    minWidth: "300px",
+    height: '40vh',
+    minHeight: '200px',
+    width: '30vw',
+    minWidth: '300px',
   },
-}));
+}))
 
 const SignIn = (props) => {
-  const dispatch = useDispatch();
-  const classes = useStyles();
+  const dispatch = useDispatch()
+  const classes = useStyles()
   const [details, setDetails] = useState({
-    email: "",
-    password: "",
-  });
-  const { email, password } = details;
+    email: '',
+    password: '',
+  })
+  const { email, password } = details
   const handelChange = (e) => {
-    const { name, value } = e.target;
-    setDetails({ ...details, [name]: value });
-  };
+    const { name, value } = e.target
+    setDetails({ ...details, [name]: value })
+  }
   const onSubmit = async (e) => {
-    e.preventDefault();
-      if (await dispatch(signIn(details))) {
-        setTimeout(() => {
-          history.push("/host");
-        }, 500);
-        setDetails({
-          email: "",
-          password: "",
-        });
+    e.preventDefault()
+    if (await dispatch(signIn(details))) {
+      setTimeout(() => {
+        history.push('/host')
+      }, 500)
+      setDetails({
+        email: '',
+        password: '',
+      })
     }
-  };
+  }
 
   return (
     <HeadFoot>
@@ -65,7 +65,7 @@ const SignIn = (props) => {
                 margin="10px 0px"
                 height="40px"
                 type="password"
-                minLength={0}
+                minLength={6}
                 value={password}
                 width="80%"
                 placeholder="Password"
@@ -88,7 +88,7 @@ const SignIn = (props) => {
         </Paper>
       </Container>
     </HeadFoot>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn

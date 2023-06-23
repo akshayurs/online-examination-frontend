@@ -182,8 +182,12 @@ const Question = ({ question, examid }) => {
               value={newInput}
               onChange={(e) => setNewInput(e.target.value)}
               style={{
-                height: '40vh',
+                minHeight: '40vh',
                 width: '80%',
+              }}
+              onPaste={(e) => {
+                e.preventDefault()
+                alert("Warning : You can't paste here")
               }}
               name="answer"
               placeholder="Type Answer Here..."
@@ -311,7 +315,7 @@ const Question = ({ question, examid }) => {
                 fontSize: 16,
                 height: '40vh',
                 width: '80%',
-                backgroundColor: '#f5f5f5',
+                backgroundColor: '#414141',
                 fontFamily:
                   'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
               }}

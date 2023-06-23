@@ -1,31 +1,31 @@
-import React from "react";
-import { Container, Input, Text } from "../../../styled";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react'
+import { Container, Input, Text } from '../../../styled'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   textareadiv: {
-    height: "70px",
-    width: "80%",
-    margin: "10px 0px",
+    height: '70px',
+    width: '80%',
+    margin: '10px 0px',
   },
   textarea: {
-    background: "#EDF8DF",
-    border: "1px solid #000000",
-    boxSizing: "border-box",
-    borderRadius: "2px",
-    padding: "5px",
-    width: "100%",
-    height: "70px",
+    background: '#dcdcdc',
+    border: '1px solid #000000',
+    boxSizing: 'border-box',
+    borderRadius: '2px',
+    padding: '5px',
+    width: '100%',
+    height: '70px',
   },
-}));
+}))
 
 const ModelForm = ({ details, setDetails }) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   const onchange = (e) => {
-    const { name, value } = e.target;
-    setDetails({ ...details, [name]: value });
-  };
+    const { name, value } = e.target
+    setDetails({ ...details, [name]: value })
+  }
 
   return (
     <Container direction="column" width="40vw">
@@ -38,7 +38,7 @@ const ModelForm = ({ details, setDetails }) => {
             height="40px"
             name="name"
             placeholder="Name"
-            value={details["name"] || ""}
+            value={details['name'] || ''}
             onChange={onchange}
             maxLength={30}
             required
@@ -49,7 +49,7 @@ const ModelForm = ({ details, setDetails }) => {
             type="email"
             name="email"
             width="80%"
-            value={details["email"] || ""}
+            value={details['email'] || ''}
             onChange={onchange}
             placeholder="Email"
             required
@@ -59,7 +59,7 @@ const ModelForm = ({ details, setDetails }) => {
               className={classes.textarea}
               placeholder="About Yourself"
               name="userinfo"
-              value={details["userinfo"] || ""}
+              value={details['userinfo'] || ''}
               onChange={onchange}
               required
             ></textarea>
@@ -74,7 +74,7 @@ const ModelForm = ({ details, setDetails }) => {
             type="password"
             name="password"
             width="80%"
-            value={details["password"] || ""}
+            value={details['password'] || ''}
             onChange={onchange}
             placeholder="Password"
             minLength={9}
@@ -86,14 +86,14 @@ const ModelForm = ({ details, setDetails }) => {
             name="confirmpassword"
             width="80%"
             placeholder="Confirm Password"
-            value={details["confirmpassword"] || ""}
+            value={details['confirmpassword'] || ''}
             onChange={onchange}
             minLength={9}
           />
         </Container>
       </form>
     </Container>
-  );
-};
+  )
+}
 
-export default ModelForm;
+export default ModelForm

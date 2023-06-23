@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { Container, Text, Button, Tab } from "../../styled";
-import { getUser } from "../../utils/localStorage";
-import { useSelector, useDispatch } from "react-redux";
-import history from "../../utils/createHistory";
-import IconButtons from "../materialui/IconButtons";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { signOut } from "../../redux/actions/user";
-import WelcomeName from "../pages/profile";
-import Logo from "../../assets/images/logo.png";
+import React, { useState, useEffect } from 'react'
+import { Container, Text, Button, Tab } from '../../styled'
+import { getUser } from '../../utils/localStorage'
+import { useSelector, useDispatch } from 'react-redux'
+import history from '../../utils/createHistory'
+import IconButtons from '../materialui/IconButtons'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import { signOut } from '../../redux/actions/user'
+import WelcomeName from '../pages/profile'
+import Logo from '../../assets/images/logo.png'
 
 const Header = (props) => {
-  const dispatch = useDispatch();
-  const [isLogin, setIsLogin] = useState(false);
-  const user = useSelector((state) => state.user);
-  const [dbUser,setDbUser] = useState(null)
+  const dispatch = useDispatch()
+  const [isLogin, setIsLogin] = useState(false)
+  const user = useSelector((state) => state.user)
+  const [dbUser, setDbUser] = useState(null)
   const check =
-    history.location.pathname === "/host" ||
-    history.location.pathname === "/exam";
+    history.location.pathname === '/host' ||
+    history.location.pathname === '/exam'
   useEffect(() => {
     const res = getUser()
     setDbUser(res)
     if (res) {
-      setIsLogin(true);
+      setIsLogin(true)
     } else {
-      setIsLogin(false);
+      setIsLogin(false)
     }
-  }, [user]);
+  }, [user])
   return (
     <Container
       direction="row"
       align="center"
       width="100%"
       justify="space-between"
-      background="#47926E"
+      background="#2b325c"
       height="50px"
     >
       <Container
@@ -47,7 +47,7 @@ const Header = (props) => {
           family="Purisa"
           size="25px"
           weight="bold"
-          color="#F3EA16"
+          color="#fff"
           margin="0 0 0 1vw"
           lineHeight="0px"
         >
@@ -61,23 +61,24 @@ const Header = (props) => {
         height="50px"
         flex="0.8"
       >
-        {isLogin && check && dbUser && (
-          
-            (dbUser["user"]["usertype"]=="company"?
+        {isLogin &&
+          check &&
+          dbUser &&
+          (dbUser['user']['usertype'] == 'company' ? (
             <Tab
-              active={history.location.pathname === "/host"}
-              onClick={() => history.push("/host")}
+              active={history.location.pathname === '/host'}
+              onClick={() => history.push('/host')}
             >
               Host
-            </Tab>:
-             <Tab
-              active={history.location.pathname === "/exam"}
-              onClick={() => history.push("/exam")}
+            </Tab>
+          ) : (
+            <Tab
+              active={history.location.pathname === '/exam'}
+              onClick={() => history.push('/exam')}
             >
               Exam
             </Tab>
-            )
-        )}
+          ))}
       </Container>
       <Container
         direction="row"
@@ -91,11 +92,11 @@ const Header = (props) => {
             <WelcomeName />
             <IconButtons
               onClick={() => {
-                dispatch(signOut());
+                dispatch(signOut())
               }}
               tooltipTitle="Log Out"
             >
-              <ExitToAppIcon style={{ color: "#eb7d34" }} />
+              <ExitToAppIcon style={{ color: '#eb7d34' }} />
             </IconButtons>
           </>
         ) : (
@@ -104,11 +105,10 @@ const Header = (props) => {
               height="35px"
               margin="0px 10px 0px 0px"
               width="90px"
-              background={
-                history.location.pathname === "/signup" ? "#D24C4C" : "#963B3B"
-              }
+              color="#000"
+              background={'#e1d8d8'}
               onClick={() => {
-                history.push("/signin");
+                history.push('/signin')
               }}
             >
               Sign In
@@ -116,11 +116,11 @@ const Header = (props) => {
             <Button
               height="35px"
               width="90px"
-              background={
-                history.location.pathname === "/signin" ? "#D24C4C" : "#963B3B"
-              }
+              color="#000"
+
+              background={'#e1d8d8'}
               onClick={() => {
-                history.push("/signup");
+                history.push('/signup')
               }}
             >
               Sign Up
@@ -129,7 +129,7 @@ const Header = (props) => {
         )}
       </Container>
     </Container>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
